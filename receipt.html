@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://pyscript.net/releases/2024.1.1/core.css">
+    <script type="module" src="https://pyscript.net/releases/2024.1.1/core.js"></script>
+    <title>Receipt Generator</title>
+    <style>
+        nav {
+            background-color: #bfedef;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        nav a {
+            color: #093032;
+            text-decoration: none;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+        .page {
+            min-height: calc(100vh - 80px);
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 30px 15px;
+            background-color: #ffffff;
+        }
+        .receipt-card {
+            width: 430px;
+            max-width: 100%;
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+        }
+        .header {
+            background-color: #bfedef;
+            color: #093032;
+            text-align: center;
+            padding: 22px;
+        }
+
+        .header .icon {
+            font-size: 24px;
+        }
+
+        .header h1 {
+            margin: 5px 0 0;
+            font-size: 20px;
+        }
+
+        .header p {
+            margin: 5px 0 0;
+            font-size: 11px;
+        }
+        .content {
+            padding: 20px;
+        }
+        .menu-title {
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+        .menu-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            margin-bottom: 8px;
+            border: 1px solid #cccccc;
+            border-radius: 5px;
+            font-size: 12px;
+        }
+
+        .menu-item input {
+            margin-right: 10px;
+        }
+
+        .menu-item label {
+            color: #333333;
+            cursor: pointer;
+        }
+        .generate-btn {
+            width: 100%;
+            padding: 11px;
+            border: none;
+            border-radius: 5px;
+            background-color: #bfedef;
+            color: #093032;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .generate-btn:hover {
+            opacity: 0.9;
+        }
+        .output {
+            margin-top: 20px;
+            border-top: 1px solid #dddddd;
+            padding-top: 18px;
+        }
+
+        .output-title {
+            font-size: 12px;
+            color: #555555;
+            margin-bottom: 10px;
+            text-align: center;
+            font-weight: bold;
+        }
+        #result {
+            background-color: #f7ffff;
+            color: #093032;
+            font-size: 12px;
+            padding: 15px;
+            border: 1px solid #cccccc;
+            border-radius: 5px;
+            text-align: left;
+            min-height: 40px;
+            line-height: 1.8;
+        }
+        footer {
+            text-align: center;
+            background-color: #093032;
+            color: white;
+            padding: 10px;
+            font-size: 10px;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="index.html">
+            <img src="Projlogo2.png" alt="Logo" height="60">
+        </a>
+        <a href="index.html">
+            SKU Generator
+        </a>
+        <a href="receipt.html">
+            Receipt Generator
+        </a>
+    </nav>
+    <main class="page">
+        <div class="receipt-card">
+            <div class="header">
+                <h1>OBMC Entrep Fair - Coffee Shop</h1>
+                <p>
+                    Select a menu item to create your receipt.
+                </p>
+            </div>
+            <div class="content">
+
+                <div class="menu-title">
+                    Coffee Shop - Menu Items
+                </div>
+                <div class="menu-item">
+
+                    <input
+                        type="radio"
+                        id="americano"
+                        name="coffee"
+                        value="100">
+
+                    <label for="americano">
+                        Americano — Php 100
+                    </label>
+
+                </div>
+                <div class="menu-item">
+
+                    <input
+                        type="radio"
+                        id="coldbrew_malt"
+                        name="coffee"
+                        value="98">
+
+                    <label for="coldbrew_malt">
+                        Cold Brew Malt — Php 98
+                    </label>
+
+                </div>
+                <div class="menu-item">
+
+                    <input
+                        type="radio"
+                        id="coffee_caramel"
+                        name="coffee"
+                        value="97">
+
+                    <label for="coffee_caramel">
+                        Caramel Macchiato — Php 97
+                    </label>
+
+                </div>
+                <div class="menu-item">
+
+                    <input
+                        type="radio"
+                        id="spanish_latte"
+                        name="coffee"
+                        value="99">
+
+                    <label for="spanish_latte">
+                        Spanish Latte — Php 99
+                    </label>
+
+                </div>
+                <div class="menu-item">
+                    <input
+                        type="radio"
+                        id="affogato"
+                        name="coffee"
+                        value="96">
+
+                    <label for="affogato">
+                        Affogato — Php 96
+                    </label>
+                </div>
+                <button
+                    type="button"
+                    id="get-total"
+                    class="generate-btn"
+                    py-click="getting_total">
+                    Get Total
+                </button>
+                <div class="output">
+                    <div class="output-title">
+                        Receipt
+                    </div>
+                    <div id="result"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        Franchesca Dela Rosa | 10 - Topaz  © 2026
+    </footer>
+    <script type="py" src="./receipt.py"></script>
+</body>
+</html>
